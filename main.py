@@ -1,19 +1,13 @@
-import socket
-
 from translator_service import TranslatorService
 
-if __name__ == '__main__':
-    port = 5000
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    s.bind(("", port))
-    print ("waiting on port:", port)
-    while 1:
-        data, addr = s.recvfrom(1024)
-        command = data.decode('utf-8')
-        # print(command)
 
+def main():
+    user_input = input("Input emoji codes. E to exit: ")
+    while user_input != "E":
         translator_service = TranslatorService()
+        print(translator_service.run_translation(user_input))
+        user_input = input("Input emoji codes. E to exit: ")
 
-        print(translator_service.run_translation(command))
 
-
+if __name__ == '__main__':
+    main()
